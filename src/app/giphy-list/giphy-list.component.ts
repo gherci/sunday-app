@@ -14,14 +14,14 @@ export class GiphyListComponent implements OnInit, OnDestroy {
   collectionSize!: number;
   pageSize!: number;
   page!: number;
-  subscription!: Subscription;
+  subscription$!: Subscription;
 
   constructor(private giphyService: GiphyService) {}
 
   ngOnInit(): void {
     this.pageSize = PAGE_SIZE;
     this.page = 1;
-    this.subscription = this.giphyService.resultsChanged.subscribe(() => {
+    this.subscription$ = this.giphyService.resultsChanged$.subscribe(() => {
       const res = this.giphyService.getData();
       this.giphyData = res.data;
       this.collectionSize = res.collectionSize;
@@ -30,7 +30,7 @@ export class GiphyListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 
   onPageChange(pageNumber: number) {

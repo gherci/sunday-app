@@ -14,17 +14,17 @@ import { Subject } from 'rxjs';
 export class GiphyService {
   searchValue = '';
   giphyData: any;
-  resultsChanged = new Subject<any>();
+  resultsChanged$ = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
-  search(query: string) {
+  search(query: string): void {
     this.searchValue = query;
     const GIPHY_FULL_URL = `${GIPHY_SEARCH_HOST_URL}?api_key=${GIPHY_API_KEY}&limit=9&offset=0&q=${query}`;
     this.http.get(GIPHY_FULL_URL).subscribe(
       resp => {
         this.giphyData = resp;
-        this.resultsChanged.next(resp);
+        this.resultsChanged$.next(resp);
       },
       error => {
         console.log(error);
@@ -38,7 +38,7 @@ export class GiphyService {
     this.http.get(GIPHY_FULL_URL).subscribe(
       resp => {
         this.giphyData = resp;
-        this.resultsChanged.next(resp);
+        this.resultsChanged$.next(resp);
       },
       error => {
         console.log(error);
@@ -57,7 +57,7 @@ export class GiphyService {
     };
   }
 
-  getFullUrl(gifId: string) {
+  getFullUrl(gifId: string): string {
     return `https://media.giphy.com/media/${gifId}/giphy.gif`;
   }
 }
