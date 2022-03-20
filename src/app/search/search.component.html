@@ -1,5 +1,5 @@
 <form class="card card-sm">
-  <div class="card-body row no-gutters align-items-center">
+  <div class="card-body row align-items-center">
     <div class="col-auto">
       <i class="fas fa-search h4 text-body"></i>
     </div>
@@ -19,7 +19,7 @@
         class="btn btn-lg btn-success"
         type="button"
         [disabled]="query === ''"
-        (click)="onSubmit($event)">
+        (click)="onSubmit()">
         Search
       </button>
     </div>

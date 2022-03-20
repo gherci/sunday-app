@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GiphyService } from '../../../services/giphy.service';
+import { GiphyService } from '../services/giphy.service';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +11,7 @@ export class SearchComponent {
 
   constructor(private giphyService: GiphyService) {}
 
-  onSubmit(event: { preventDefault: () => void }) {
-    event.preventDefault();
-    console.log('event', event);
+  onSubmit() {
     this.giphyService.search(this.query);
   }
 }
